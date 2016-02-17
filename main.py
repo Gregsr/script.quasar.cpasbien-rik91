@@ -55,7 +55,6 @@ def search(query):
 
 
 def search_general(info):
-    provider.log.info(info)
     info["extra"] = settings.value.get("extra", "")  # add the extra information
     query = filters.type_filtering(info, '-')  # check type filter and set-up filters.title
     url_search = "%s/recherche/%s.html" % (settings.value["url_address"], query)
