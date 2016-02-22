@@ -55,7 +55,7 @@ def search(query):
 
 
 def search_general(info):
-    folders = {"movie": "films/", "show": "series/", "anime": ""}
+    folders = {"movie": "films/", "show": "series/", "anime": "", "general" : ""}
     info["extra"] = settings.value.get("extra", "")  # add the extra information
     query = filters.type_filtering(info, '-')  # check type filter and set-up filters.title
     url_search = "%s/recherche/%s%s.html" % (settings.value["url_address"], folders[info["type"]], query)
