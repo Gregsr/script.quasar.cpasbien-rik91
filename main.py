@@ -55,9 +55,10 @@ def search(query):
 
 
 def search_general(info):
+    folders = {"movie": "films/", "show": "series/", "anime": ""}
     info["extra"] = settings.value.get("extra", "")  # add the extra information
     query = filters.type_filtering(info, '-')  # check type filter and set-up filters.title
-    url_search = "%s/recherche/%s.html" % (settings.value["url_address"], query)
+    url_search = "%s/recherche/%s%s.html" % (settings.value["url_address"], folders[info["type"]], query)
     provider.log.info(url_search)
     browser.open(url_search)
     return extract_torrents(browser.content)
