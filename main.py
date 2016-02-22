@@ -74,8 +74,17 @@ def search_movie(info):
 def search_episode(info):
     if info['absolute_number'] == 0:
         info["type"] = "show"
-        info["query"] = info['title'].encode('utf-8') + ' s%02de%02d' % (
-            info['season'], info['episode'])  # define query
+        info["query"] = info['title'].encode('utf-8') + ' s%02de%02d' % (info['season'], info['episode'])  # define query
+    else:
+        info["type"] = "anime"
+        info["query"] = info['title'].encode('utf-8') + ' %02d' % info['absolute_number']  # define query anime
+    return search_general(info)
+
+
+def search_season(info):
+    if info['absolute_number'] == 0:
+        info["type"] = "show"
+        info["query"] = info['title'].encode('utf-8') + ' saison %d' % (info['season'])  # define query
     else:
         info["type"] = "anime"
         info["query"] = info['title'].encode('utf-8') + ' %02d' % info['absolute_number']  # define query anime
@@ -83,7 +92,7 @@ def search_episode(info):
 
 
 # This registers your module for use
-provider.register(search, search_movie, search_episode)
+provider.register(search, search_movie, search_episode, search_season)
 
 del settings
 del browser
