@@ -87,7 +87,10 @@ def search_season(info):
     return search_general(info)
 
 # This registers your module for use
-provider.register(search, search_movie, search_episode, search_season)
+if "false" == settings.value.get("episodes", "false"):
+    provider.register(search, search_movie, search_episode, search_season)
+else:
+    provider.register(search, search_movie, search_season, search_season)
 
 del settings
 del browser
