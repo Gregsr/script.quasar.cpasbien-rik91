@@ -2,6 +2,7 @@
 __author__ = 'rik91'
 
 import common
+import re, string, unicodedata
 from bs4 import BeautifulSoup
 from quasar import provider
 
@@ -57,11 +58,22 @@ def search(query):
 def search_general(info):
     folders = {"movie": "films/", "show": "series/", "anime": "", "general" : ""}
     info["extra"] = settings.value.get("extra", "")  # add the extra information
+    info["query"] = cleanQuery(info["query"])
     query = filters.type_filtering(info, '-')  # check type filter and set-up filters.title
     url_search = "%s/recherche/%s%s.html" % (settings.value["url_address"], folders[info["type"]], query)
     provider.log.info(url_search)
     browser.open(url_search)
     return extract_torrents(browser.content)
+
+
+def cleanQuery(query):
+    import types
+    #Suppression de la ponctuation
+    regex = re.compile("[%s]" % re.escape(string.punctuation + u"’…"))
+    query = regex.sub(" ", query)
+    #Suppression des accents
+    query = ''.join((c for c in unicodedata.normalize('NFD', query.decode('utf-8')) if unicodedata.category(c) != 'Mn'))
+    return query
 
 
 def search_movie(info):
