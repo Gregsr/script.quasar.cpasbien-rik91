@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
     <category label="32050">
-        <setting label="32093" type="text" id="url_address" default="http://www.cpasbien.io"/>
+        <setting label="32093" type="text" id="url_address" default="http://www.cpasbien.cm"/>
         <!--<setting label="32199" type="lsep"/>
         <setting label="32151" type="labelenum" id="language" values="en|de|es|fr|it|pt" default="en"/>-->
         <setting label="32200" type="lsep"/>
